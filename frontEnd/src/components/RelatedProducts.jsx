@@ -30,7 +30,7 @@ const RelatedProducts = ({ category, subCategory }) => {
             key={item._id}
             name={item.name}
             id={item._id}
-            image={item.image || "../assets/p_img11.png"} // Provide a fallback image path
+            image={item.image || "../assets/logo-tdamon (1).webp"} // Provide a fallback image path
             price={item.price}
           />
         ))}

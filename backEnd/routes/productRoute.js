@@ -24,7 +24,7 @@ productRouter.post(
 );
 
 // Admin: Remove a product
-productRouter.post("/remove", removeProduct);
+productRouter.post("/remove", adminAuth, removeProduct);
 
 // Get a single product
 productRouter.post("/single", singleProduct); // GET method for fetching a single product by ID

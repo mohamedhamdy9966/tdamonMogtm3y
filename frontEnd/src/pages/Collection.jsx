@@ -130,6 +130,15 @@ const Collection = () => {
               />{" "}
               Kids
             </p>
+            <p className="flex gap-2">
+              <input
+                className="w-3"
+                type="checkbox"
+                value={"Services"}
+                onChange={toggleCategory}
+              />{" "}
+              Services
+            </p>
           </div>
         </div>
         {/* subcategory filter */}
@@ -166,6 +175,15 @@ const Collection = () => {
                 onChange={toggleSubCategory}
               />{" "}
               WinterWear
+            </p>
+            <p className="flex gap-2">
+              <input
+                className="w-3"
+                type="checkbox"
+                value={"Basics"}
+                onChange={toggleSubCategory}
+              />{" "}
+              Basics
             </p>
           </div>
         </div>

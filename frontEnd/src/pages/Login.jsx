@@ -25,15 +25,16 @@ const Login = () => {
           toast.error(Response.data.message);
         }
       } else {
-        const loginResponse = await axios.post(backendUrl + "api/user/login", {
+        const response = await axios.post(backendUrl + "api/user/login", {
           email,
           password,
         });
-        if (loginResponse.data.success) {
-          setToken(loginResponse.data.token);
-          localStorage.setItem("token", loginResponse.data.token);
+        console.log(response.data)
+        if (response.data.success) {
+          setToken(response.data.token);
+          localStorage.setItem("token", response.data.token);
         } else {
-          toast.error(loginResponse.data.message);
+          toast.error(response.data.message);
         }
       }
     } catch (error) {

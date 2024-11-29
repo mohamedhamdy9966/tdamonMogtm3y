@@ -8,43 +8,43 @@ const Product = () => {
   const { productId } = useParams();
   const { products, currency, addToCart } = useContext(ShopContext);
 
-  const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [size, setSize] = useState("");
 
-  useEffect(() => {
-    const product = products.find((item) => item._id === productId);
-    console.log(products);
-    if (product) {
-      setProductData(product);
-      // Check if the product has images and set the first image
-      if (product && product.images && product.images.length > 0) {
-        setProductData(product);
-        setImage(product.images[0]);
+  const fetchProductData = async () => {
+    products.map((item)=>{
+      if (item._id === productId) {
+        setProductData(item)
+        setImage(item.image[0])
+        return null;
       }
-      console.log("Product Data:", product); // Log the fetched product data
-    }
+    })
+  }
+
+  useEffect(() => {
+    fetchProductData()
   }, [productId, products]);
 
   if (!productData) {
     return <div className="text-center mt-10">Loading product...</div>;
   }
 
-  return (
-    <div className="border-t-2 pt-10">
+  return productData ?  (
+    <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
       <div className="flex gap-12 flex-col sm:flex-row">
         {/* Product Images */}
         <div className="flex-1 flex flex-col-reverse sm:flex-row gap-3">
-          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-auto sm:w-[18%] w-full gap-2">
-            {productData.images && productData.images.length > 0 ? (
-              productData.images.map((img, index) => (
+          <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-scroll justify-between sm:justify-normal sm:w-[18.7%] w-full gap-2">
+            {productData.image && productData.image.length > 0 ? (
+              productData.image.map((item, index) => (
                 <img
                   key={index}
-                  src={img}
+                  src={item}
                   alt={`Product ${index}`}
-                  onClick={() => setImage(img)}
+                  onClick={() => setImage(item)}
                   className={`cursor-pointer w-[24%] sm:w-full ${
-                    img === image ? "border-2 border-orange-500" : ""
+                    item === image ? "border-2 border-orange-500" : ""
                   }`}
                 />
               ))
@@ -151,7 +151,7 @@ const Product = () => {
         subCategory={productData.subCategory}
       />
     </div>
-  );
+  ) : <div className="opacity-0"></div>
 };
 
 export default Product;

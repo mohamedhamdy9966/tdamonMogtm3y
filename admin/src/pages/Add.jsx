@@ -159,6 +159,7 @@ const Add = ({ token }) => {
             <option value="Men">Men</option>
             <option value="Women">Women</option>
             <option value="Kids">Kids</option>
+            <option value="Services">Services</option>
           </select>
         </div>{" "}
         <div>
@@ -170,6 +171,7 @@ const Add = ({ token }) => {
             <option value="TopWear">TopWear</option>
             <option value="BottomWear">BottomWear</option>
             <option value="Winter">Winter</option>
+            <option value="Basics">Basics</option>
           </select>
         </div>
         <div>
@@ -269,6 +271,23 @@ const Add = ({ token }) => {
               } px-3 py-1 cursor-pointer`}
             >
               XXL
+            </p>
+          </div>
+          <div
+            onClick={() =>
+              setSizes((prev) =>
+                prev.includes("No Size")
+                  ? prev.filter((item) => item !== "No Size")
+                  : [...prev, "No Size"]
+              )
+            }
+          >
+            <p
+              className={`${
+                sizes.includes("No Size") ? "bg-pink-100 border" : "bg-slate-200"
+              } px-3 py-1 cursor-pointer`}
+            >
+              No Size
             </p>
           </div>
         </div>
@@ -371,7 +390,7 @@ const Add = ({ token }) => {
   id="bestSeller"
 />
         <label className="cursor-pointer" htmlFor="bestSeller">
-          Add to BestSeller
+          Add to Services
         </label>
       </div>
       <button type="submit" className="w-28 py-3 mt-4 bg-black text-white">

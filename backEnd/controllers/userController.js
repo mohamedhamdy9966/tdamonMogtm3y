@@ -8,13 +8,6 @@ const createToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 
-// // Helper function to find user by email or mobile
-// const findUser = async (email, mobile) => {
-//   if (email) return userModel.findOne({ email });
-//   if (mobile) return userModel.findOne({ mobile });
-//   return null;
-// };
-
 // Login User
 const loginUser = async (req, res) => {
   try {
@@ -110,11 +103,12 @@ const adminLogin = async (req, res) => {
     }
 
     // Generate a token
-        const payload = { email: process.env.ADMIN_EMAIL };    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "2h" });
+        const payload = { email: process.env.ADMIN_EMAIL };    
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "2h" });
         res.status(200).json({ success: true, token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    res.status(500).json({ success: false, message: "Internal server error for adminLogin" });
   }
 };
 

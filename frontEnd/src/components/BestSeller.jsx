@@ -9,13 +9,13 @@ const BestSeller = () => {
   const bestSeller = useMemo(() => {
     // Ensure products is an array before filtering
     if (!Array.isArray(products)) return [];
-    return products.filter((item) => item.bestseller).slice(0, 5);
+    return products.filter((item) => item.bestseller).slice(0, 10);
   }, [products]);
 
   return (
     <div className="my-10">
       <div className="text-center text-3xl py-8">
-        <Title text1="Best" text2="Sellers" />
+        <Title text1="Society" text2="Services" />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
           نهدف من خلال تطبيقنا وحملتنا إلى تقديم الدعم للأفراد والعائلات في ظل
           الظروف الاقتصادية الصعبة التي نعيشها، من خلال توفير موارد فعّالة
@@ -30,14 +30,14 @@ const BestSeller = () => {
               key={item._id}
               id={item._id}
               name={item.name}
-              image={item.image?.[0] || "default-image.jpg"}
+              image={item.image?.[0] || "../assets/logo-tdamon (1).webp"}
               price={item.price ?? "N/A"}
             />
           ))}
         </div>
       ) : (
         <div className="text-center text-gray-500 mt-8">
-          <p>No BestSellers Available</p>
+          <p>Not Available</p>
         </div>
       )}
     </div>

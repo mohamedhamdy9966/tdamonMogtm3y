@@ -3,15 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
 
 const CartTotal = () => {
-  const { currency = "$", delivery_fee = 0, getCartAmount } = useContext(ShopContext);
-
-  // Ensure getCartAmount returns a valid number
-  const cartAmount = typeof getCartAmount === "function" ? getCartAmount() : 0;
-  const formattedCurrency = (amount) =>
-    new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: currency || "USD",
-    }).format(amount);
+  const { currency, delivery_fee, getCartAmount } = useContext(ShopContext);
 
   return (
     <div className="w-full">
@@ -22,14 +14,14 @@ const CartTotal = () => {
         {/* Subtotal */}
         <div className="flex justify-between">
           <p>Subtotal</p>
-          <p>{formattedCurrency(cartAmount)}</p>
+          <p>{currency}{getCartAmount()}.00</p>
         </div>
         <hr />
         
         {/* Shipping Fee */}
         <div className="flex justify-between">
           <p>Shipping Fee</p>
-          <p>{formattedCurrency(delivery_fee)}</p>
+          <p>{currency}{delivery_fee}</p>
         </div>
         <hr />
         
@@ -37,7 +29,7 @@ const CartTotal = () => {
         <div className="flex justify-between text-lg font-bold">
           <b>Total</b>
           <p>
-            {formattedCurrency(cartAmount === 0 ? 0 : cartAmount + delivery_fee)}
+            {currency} {getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee }
           </p>
         </div>
       </div>

@@ -9,7 +9,7 @@ const List = ({ token }) => {
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(backendUrl + '/api/product/list');
+      const response = await axios.get(backendUrl + "/api/product/list");
       console.log(response.data);
       if (response.data.success) {
         setList(response.data.products);
@@ -17,17 +17,20 @@ const List = ({ token }) => {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       toast.error(error.message);
     }
   };
 
   const removeProduct = async (id) => {
-    
     try {
-      const response = await axios.post(backendUrl + '/api/product/remove', {id}, {
-        headers: { Authorization: `Bearer ${token}` },
-      });      
+      const response = await axios.post(
+        backendUrl + "/api/product/remove",
+        { id },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchList();
@@ -38,7 +41,7 @@ const List = ({ token }) => {
       console.log(error);
       toast.error(error.message);
     }
-  };    
+  };
 
   useEffect(() => {
     fetchList();
@@ -62,23 +65,22 @@ const List = ({ token }) => {
             className="grid grid-cols-[1fr_3fr_1fr] md:grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-1 px-2 border text-sm"
             key={index}
           >
-            <img className="w-12" src="" alt="image"/>
+            <img className="w-12" src="" alt="image" />
             <p>{item.name}</p>
             <p>{item.category}</p>
             <p>
               {currency}
               {item.price}
             </p>
-            <p 
-  onClick={() => {
-    console.log(item._id);
-    removeProduct(item._id);
-  }}
-  className="cursor-pointer"
->
-  X
-</p>
-
+            <p
+              onClick={() => {
+                console.log(item._id);
+                removeProduct(item._id);
+              }}
+              className="cursor-pointer"
+            >
+              X
+            </p>
           </div>
         ))}
       </div>

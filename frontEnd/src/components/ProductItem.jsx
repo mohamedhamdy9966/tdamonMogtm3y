@@ -3,7 +3,7 @@ import { ShopContext } from "../context/ShopContext";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const ProductItem = ({ id, images = [], name, price }) => {
+const ProductItem = ({ id, image, name, price }) => {
   const { currency } = useContext(ShopContext);
 
   const formattedPrice = new Intl.NumberFormat("en-US", {
@@ -16,7 +16,7 @@ const ProductItem = ({ id, images = [], name, price }) => {
       <div className="overflow-hidden">
         <img
           className="hover:scale-110 transition ease-in-out"
-          src={images.length > 0 ? images[0] : "placeholder.jpg"}
+          src={image.length > 0 ? image[0] : "placeholder.jpg"}
           alt={name || "Product Image"}
         />
       </div>
@@ -28,13 +28,9 @@ const ProductItem = ({ id, images = [], name, price }) => {
 
 ProductItem.propTypes = {
   id: PropTypes.string.isRequired,
-  images: PropTypes.arrayOf(PropTypes.string),
+  image: PropTypes.arrayOf(PropTypes.string).isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-};
-
-ProductItem.defaultProps = {
-  images: [],
 };
 
 export default ProductItem;

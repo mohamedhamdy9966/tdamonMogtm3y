@@ -1,26 +1,35 @@
-import { assets } from "../assets/assets"
+import { assets } from "../assets/assets";
 
 const MainContent = () => {
   return (
-    <div className="flex flex-col sm:flex-row border border-gray-400">
-        {/* mainContent left Side */}
+    <section className="flex flex-col sm:flex-row border border-gray-400">
+      {/* MainContent Left Side */}
       <div className="w-full sm:w-1/2 flex items-center justify-center py-10 sm:py-0">
         <div className="text-[#414141]">
-            <div className="flex items-center gap-2">
-                <p className="w-8 md:w-11 h-[2px] bg-[#414141]"></p>
-                <p className="font-medium text-sm md:text-base">BestSellers</p>
-            </div>
-            <h2 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">Latest Goods</h2>
-            <div className="flex items-center gap-2">
-                <p className="font-semibold text-sm md:text-base">Shop Now</p>
-                <p className="w-8 md:w-11 h-[1px] bg-[#414141]"></p>
-            </div>
+          {/* BestSeller Section */}
+          <div className="flex items-center gap-2">
+            <span className="w-8 md:w-11 h-[2px] bg-[#414141]"></span>
+            <p className="font-medium text-sm md:text-base">Feeding Propagation</p>
+          </div>
+          {/* Main Heading */}
+          <h2 className="prata-regular text-3xl sm:py-3 lg:text-5xl leading-relaxed">
+            Help Back
+          </h2>
+          {/* Shop Now Section */}
+          <div className="flex items-center gap-2 hover:cursor-pointer hover:text-gray-800 transition">
+            <p className="font-semibold text-sm md:text-base">Shop Low Price</p>
+            <span className="w-8 md:w-11 h-[1px] bg-[#414141]"></span>
+          </div>
         </div>
       </div>
-      {/* Right side */}
-      <img src={assets.hero_img} className="w-full sm:w-1/2" alt="mainContent-img"/>
-    </div>
-  )
-}
+      {/* MainContent Right Side */}
+      <img
+        src={assets.hero_img}
+        className="w-full sm:w-1/2 object-cover"
+        alt="Latest goods promotional banner"
+      />
+    </section>
+  );
+};
 
-export default MainContent
+export default MainContent;

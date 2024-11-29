@@ -17,7 +17,7 @@ const RelatedProducts = ({ category, subCategory }) => {
       );
       setRelated(productsCopy.slice(0, 5));
     }
-  }, [products]);
+  }, [products, category, subCategory]);
 
   return (
     <div className="my-24">
@@ -25,12 +25,12 @@ const RelatedProducts = ({ category, subCategory }) => {
         <Title text1={"Related"} text2={"Products"} />
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">
-        {related.map((item, index) => (
+        {related.map((item) => (
           <ProductItem
-            key={index}
+            key={item._id}
             name={item.name}
             id={item._id}
-            image={item.image}
+            image={item.image || "../assets/p_img11.png"} // Provide a fallback image path
             price={item.price}
           />
         ))}

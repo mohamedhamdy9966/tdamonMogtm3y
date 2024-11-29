@@ -3,7 +3,15 @@ import { ShopContext } from "../context/ShopContext";
 import Title from "./Title";
 
 const CartTotal = () => {
-  const { currency, delivery_fee, getCartAmount } = useContext(ShopContext);
+  const { currency = "$", delivery_fee = 0, getCartAmount } = useContext(ShopContext);
+
+  // Ensure getCartAmount returns a valid number
+  const cartAmount = typeof getCartAmount === "function" ? getCartAmount() : 0;
+  const formattedCurrency = (amount) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency || "USD",
+    }).format(amount);
 
   return (
     <div className="w-full">
@@ -11,27 +19,25 @@ const CartTotal = () => {
         <Title text1={"Cart"} text2={"Total"} />
       </div>
       <div className="flex flex-col gap-2 mt-2 text-sm">
+        {/* Subtotal */}
         <div className="flex justify-between">
           <p>Subtotal</p>
-          <p>
-            {currency}
-            {getCartAmount()}.00
-          </p>
+          <p>{formattedCurrency(cartAmount)}</p>
         </div>
         <hr />
+        
+        {/* Shipping Fee */}
         <div className="flex justify-between">
           <p>Shipping Fee</p>
-          <p>
-            {currency}
-            {delivery_fee}.00
-          </p>
+          <p>{formattedCurrency(delivery_fee)}</p>
         </div>
         <hr />
+        
+        {/* Total */}
         <div className="flex justify-between text-lg font-bold">
           <b>Total</b>
           <p>
-            {currency}
-            {getCartAmount() === 0 ? 0 : getCartAmount() + delivery_fee}.00
+            {formattedCurrency(cartAmount === 0 ? 0 : cartAmount + delivery_fee)}
           </p>
         </div>
       </div>
